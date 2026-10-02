@@ -1,0 +1,38 @@
+Name: Alanoud Alotaibi
+
+Current Status:
+Recent graduate.
+
+Education:
+Bachelor's degree in Applied Computing – Computer Networks Track
+from King Saud University.
+
+Technical Interests:
+AI
+Agentic AI
+Cybersecurity
+Computer Networks
+
+Technical Skills:
+Python
+Computer Networks
+AI and Agentic AI fundamentals
+Cybersecurity fundamentals
+
+Experience:
+Completed a 6-month cooperative training at Mobily in Business Operations – Assurance & Control.
+
+Projects:
+
+WAIN:
+WAIN is an AI-powered place recommendation agent focused on helping users discover places in Riyadh based on their preferences.
+The user enters a request, the system extracts preferences, searches the available place data, ranks suitable places, and generates recommendations.
+
+Graduation Project:
+IoT Fire Detection System.
+
+Career Interests:
+AI
+Agentic AI
+Cybersecurity
+Computer Networks
