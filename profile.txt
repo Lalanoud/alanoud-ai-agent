@@ -27,24 +27,41 @@ Computer Networks
 
 Technical Skills:
 Python
-Computer Networks
+Machine learning
+Large Language Models (LLMs)
+Generative AI
+AI agents
+Computer Networks, including TCP/IP, network protocols, and network administration
 AI and Agentic AI fundamentals
 Cybersecurity fundamentals
+She has worked with technologies such as Streamlit, Firebase, and VMware.
+
+Programming Languages:
+Alanoud has a foundational understanding of Python, which she studied at university and explored further through AI-related projects and learning.
+
+AI Technologies:
+Alanoud has explored Python, the OpenAI SDK, Large Language Models, Generative AI, and AI agent development.
+She has also learned about agentic workflows, LangChain, LangGraph, FAISS, and ChromaDB through her bootcamp and projects.
 
 Experience:
 Completed a 6-month cooperative training at Mobily in Business Operations – Assurance & Control.
+She supported service activation, testing, troubleshooting, and coordination with technical teams.
+She gained hands-on experience with ServiceNow, Remedy, and RSA.
 
 Projects:
 
 WAIN:
-WAIN is an AI-powered place recommendation agent focused on helping users discover places in Riyadh based on their preferences.
+WAIN is an AI-powered place recommendation agent focused on helping users discover places and activities in Riyadh based on their preferences, such as budget, category, rating, and location.
 The user enters a request, the system extracts preferences, searches the available place data, ranks suitable places, and generates recommendations.
+WAIN was developed as a capstone project for the Agentic AI Engineering Bootcamp at SDA.
+Alanoud worked as the UI Engineer on the WAIN capstone project. Her role focused on developing the user interface using Streamlit and presenting place recommendations in a clear, user-friendly format.
 
 Graduation Project:
 Wireless Fire Safety: A Proactive IoT Approach (also known as SHFD).
 It is an IoT fire detection system built as the graduation project of the Computer Networks track at King Saud University.
 The system uses ESP32 microcontrollers with sensors for temperature, gas and smoke (MQ-2), and motion (PIR) to detect fire risks.
 Sensor data is sent to Firebase, and a Flutter mobile app shows real-time alerts to the user.
+
 Career Interests:
 AI
 Agentic AI
