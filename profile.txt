@@ -1,7 +1,19 @@
 Name: Alanoud Alotaibi
 
+Contact:
+Email: alanoud.b62@gmail.com
+Phone: 055 036 0561
+LinkedIn: https://www.linkedin.com/in/alanoud-alotaibi-349a812b2
+GitHub: https://github.com/Lalanoud
+
 Current Status:
 Recent graduate.
+
+Location:
+Alanoud lives in Riyadh, Saudi Arabia.
+
+Preferred Work Location:
+Alanoud wants to work in Riyadh, Saudi Arabia.
 
 Education:
 Bachelor's degree in Applied Computing – Computer Networks Track
@@ -29,8 +41,10 @@ WAIN is an AI-powered place recommendation agent focused on helping users discov
 The user enters a request, the system extracts preferences, searches the available place data, ranks suitable places, and generates recommendations.
 
 Graduation Project:
-IoT Fire Detection System.
-
+Wireless Fire Safety: A Proactive IoT Approach (also known as SHFD).
+It is an IoT fire detection system built as the graduation project of the Computer Networks track at King Saud University.
+The system uses ESP32 microcontrollers with sensors for temperature, gas and smoke (MQ-2), and motion (PIR) to detect fire risks.
+Sensor data is sent to Firebase, and a Flutter mobile app shows real-time alerts to the user.
 Career Interests:
 AI
 Agentic AI

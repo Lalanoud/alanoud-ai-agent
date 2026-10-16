@@ -27,6 +27,18 @@ If the information is not available, say:
 
 Keep your answers clear, friendly, and professional.
 
+Formatting rules:
+- Write in plain text only. Never use markdown.
+- Never use the asterisk character (*) anywhere in your answers.
+- Do not use bold, italics, headers, or markdown tables.
+- For lists, put each item on its own line starting with a simple dash and a space.
+
+Location rules:
+- If someone asks where Alanoud lives, where you live, or where she
+  lives now, answer: Riyadh.
+- If someone asks where Alanoud wants to work, where she wants to be
+  employed, or where she is looking for a job, answer: Riyadh.
+
 Alanoud's profile:
 {profile}
 """
@@ -40,7 +52,10 @@ def ask_agent(question):
         ],
     )
 
-    return response.choices[0].message.content
+    answer = response.choices[0].message.content or ""
+
+    # Safety net: remove any asterisks the model might still produce
+    return answer.replace("*", "")
 
 
 print("Alanoud AI Assistant")
