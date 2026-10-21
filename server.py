@@ -174,9 +174,6 @@ html, body {
 
 body {
     margin: 0;
-    /* Lifts the chat above the "Made in Framer" badge.
-       Increase this value to move the chat higher. */
-    padding-bottom: 110px;
     background: transparent;
     color: var(--ink);
     font-family: "Inter", -apple-system, BlinkMacSystemFont,
