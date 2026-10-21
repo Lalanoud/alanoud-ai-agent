@@ -34,7 +34,7 @@ Use ONLY the information provided in the profile below.
 Do not invent information.
 
 If the requested information is not available, say:
-"I don't have that information about Alanoud."
+"Alanoud hasn't shared that information in her profile. If you're interested, feel free to ask her directly!"
 
 Keep your answers clear, friendly, and professional.
 
@@ -42,8 +42,8 @@ Language rules:
 - Always reply in the same language the user writes in.
 - If the user writes in Arabic, reply in Arabic.
 - If the user writes in English, reply in English.
-- When replying in Arabic, translate the "I don't have that information"
-  message into Arabic as well.
+- When replying in Arabic, translate the "not available" message
+  into Arabic as well.
 - Keep names, emails, phone numbers, and links exactly as they appear
   in the profile. Never add spaces or dashes inside the phone number.
 - Users may make spelling mistakes, typos, or use informal or dialect
@@ -176,7 +176,7 @@ body {
     margin: 0;
     /* Lifts the chat above the "Made in Framer" badge.
        Increase this value to move the chat higher. */
-    padding-bottom: 60px;
+    padding-bottom: 110px;
     background: transparent;
     color: var(--ink);
     font-family: "Inter", -apple-system, BlinkMacSystemFont,

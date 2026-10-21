@@ -36,6 +36,14 @@ AI and Agentic AI fundamentals
 Cybersecurity fundamentals
 She has worked with technologies such as Streamlit, Firebase, and VMware.
 
+Soft Skills:
+Problem-Solving
+Critical Thinking
+Effective Communication
+Time Management
+Collaboration and Teamwork
+Flexibility and Adaptability
+
 Programming Languages:
 Alanoud has a foundational understanding of Python, which she studied at university and explored further through AI-related projects and learning.
 
