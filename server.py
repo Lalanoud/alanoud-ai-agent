@@ -447,10 +447,6 @@ body {
         <div id="avatar">A</div>
         <div>
             <div id="header-title">Alanoud AI</div>
-            <div id="header-subtitle">
-                <span id="status-dot"></span>
-                Ask me anything about Alanoud
-            </div>
         </div>
     </div>
 
