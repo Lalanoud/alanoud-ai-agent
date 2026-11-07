@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: alanoud-ai-agent
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://lalanoud.github.io,http://localhost:8000,http://127.0.0.1:8000

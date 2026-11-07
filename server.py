@@ -1,20 +1,33 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 from pathlib import Path
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 import os
 
+# .env is for local development only. On Render, set variables in the dashboard.
 load_dotenv(Path(__file__).parent / ".env")
 
-client = OpenAI(
-    api_key=os.getenv("GROQ_API_KEY"),
-    base_url="https://api.groq.com/openai/v1",
-)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("alanoud-ai")
 
-MODEL = "openai/gpt-oss-120b"
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+
+if not GROQ_API_KEY:
+    # Without this check the OpenAI client raises while the app is starting,
+    # which makes the whole Render deploy fail with no clear reason.
+    logger.error("GROQ_API_KEY is not set. Add it in Render > Environment.")
+
+client = OpenAI(
+    api_key=GROQ_API_KEY or "not-configured",
+    base_url="https://api.groq.com/openai/v1",
+    timeout=60,
+    max_retries=2,
+)
 
 with open(
     Path(__file__).parent / "profile.txt",
@@ -70,7 +83,14 @@ Formatting rules:
 - Write in plain text only. Never use markdown.
 - Never use the asterisk character (*) anywhere in your answers.
 - Do not use bold, italics, headers, or markdown tables.
-- For lists, put each item on its own line starting with a simple dash and a space.
+- Write in natural, well-written paragraphs. Do not use bullet points,
+  dashes as list markers, numbering, or headings unless the user
+  explicitly asks for a list, steps, or several separate items.
+- For simple questions, answer in 2 to 4 clear sentences.
+- When describing projects, write short paragraphs, one per project,
+  instead of bullet points. Do not repeat the same information.
+- If the user explicitly asks for a list, put each item on its own line
+  starting with a simple dash and a space.
 
 Location rules:
 - If someone asks where Alanoud lives, where you live, or where she
@@ -84,17 +104,30 @@ Alanoud's profile:
 
 app = FastAPI()
 
+# Origins are scheme + host only (no path). Override with the ALLOWED_ORIGINS
+# environment variable (comma separated), e.g. to add a custom domain.
+DEFAULT_ORIGINS = (
+    "https://lalanoud.github.io,"
+    "http://localhost:8000,http://127.0.0.1:8000,"
+    "http://localhost:5500,http://127.0.0.1:5500"
+)
+ALLOWED_ORIGINS = [
+    o.strip().rstrip("/")
+    for o in os.getenv("ALLOWED_ORIGINS", DEFAULT_ORIGINS).split(",")
+    if o.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
 )
 
 
 class Question(BaseModel):
-    question: str
+    question: str = Field(..., min_length=1, max_length=1000)
 
 
 @app.get("/")
@@ -102,8 +135,19 @@ def home():
     return {"message": "Alanoud AI Assistant is running!"}
 
 
+@app.get("/health")
+def health():
+    return {"status": "ok", "groq_configured": bool(GROQ_API_KEY)}
+
+
 @app.post("/chat")
 def chat(data: Question):
+    if not GROQ_API_KEY:
+        raise HTTPException(
+            status_code=503,
+            detail="The assistant is not configured yet (missing GROQ_API_KEY).",
+        )
+
     try:
         response = client.chat.completions.create(
             model=MODEL,
@@ -112,22 +156,20 @@ def chat(data: Question):
                 {"role": "user", "content": data.question}
             ],
         )
+    except Exception:
+        # Full error goes to the Render logs; the visitor gets a clean message.
+        logger.exception("Groq request failed")
+        raise HTTPException(
+            status_code=502,
+            detail="The AI service could not answer right now. Please try again.",
+        )
 
-        answer = response.choices[0].message.content or ""
+    answer = response.choices[0].message.content or ""
 
-        # Safety net: remove any asterisks the model might still produce
-        answer = answer.replace("*", "")
+    # Safety net: remove any asterisks the model might still produce
+    answer = answer.replace("*", "")
 
-        return {
-            "answer": answer
-        }
-
-    except Exception as error:
-        # Log the real error server-side so it can be debugged
-        print("Chat error:", error)
-        return {
-            "answer": "Sorry, I couldn't answer right now."
-        }
+    return {"answer": answer}
 
 
 # Raw string so backslashes inside the JS/CSS are never interpreted by Python

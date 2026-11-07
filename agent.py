@@ -59,7 +59,14 @@ Formatting rules:
 - Write in plain text only. Never use markdown.
 - Never use the asterisk character (*) anywhere in your answers.
 - Do not use bold, italics, headers, or markdown tables.
-- For lists, put each item on its own line starting with a simple dash and a space.
+- Write in natural, well-written paragraphs. Do not use bullet points,
+  dashes as list markers, numbering, or headings unless the user
+  explicitly asks for a list, steps, or several separate items.
+- For simple questions, answer in 2 to 4 clear sentences.
+- When describing projects, write short paragraphs, one per project,
+  instead of bullet points. Do not repeat the same information.
+- If the user explicitly asks for a list, put each item on its own line
+  starting with a simple dash and a space.
 
 Location rules:
 - If someone asks where Alanoud lives, where you live, or where she
@@ -86,17 +93,21 @@ def ask_agent(question):
     return answer.replace("*", "")
 
 
-print("Alanoud AI Assistant")
-print("Type 'exit' to stop.\n")
+def main():
+    print("Alanoud AI Assistant")
+    print("Type 'exit' to stop.\n")
 
-while True:
-    question = input("You: ")
+    while True:
+        question = input("You: ")
 
-    if question.lower() == "exit":
-        break
+        if question.lower() == "exit":
+            break
 
-    try:
-        answer = ask_agent(question)
-        print("\nAI:", answer, "\n")
-    except Exception as e:
-        print("\nError:", e, "\n")
+        try:
+            answer = ask_agent(question)
+            print("\nAI:", answer, "\n")
+        except Exception as e:
+            print("\nError:", e, "\n")
+
+if __name__ == "__main__":
+    main()
